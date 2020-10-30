@@ -20,7 +20,7 @@ mongoose.connect('mongodb+srv://dbUser:senha@cluster0-5eiq0.mongodb.net/test?ret
 
 console.log(process.env.HOST);
 const host = process.env.HOST || '0.0.0.0';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
