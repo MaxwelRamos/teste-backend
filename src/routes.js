@@ -5,7 +5,7 @@ const Yup = require('yup');
 const bcrypt = require('bcryptjs');
 
 routes.get("/", (req,res) => {
-    return res.json({ Local: 'Raiz'});
+    return res.json({ Local: 'Raiz2'});
 });
 
 //Routes relacionadas ao Usuario

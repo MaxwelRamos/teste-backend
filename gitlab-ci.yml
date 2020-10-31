@@ -1,0 +1,48 @@
+services:
+- docker:dind
+
+cache:
+ key: ${CI_COMMIT_REF_SLUG}
+ paths:
+   - node_modules/
+ policy: pull-push
+
+stages:
+ - build
+ - package
+ - aceitacao
+ 
+instalacao:
+ image: node:latest
+ stage: build
+ script:   
+   - npm install
+ 
+build-image:
+ image: docker:latest
+ stage: package 
+ script:   
+   - docker build -t $PROJECT_NAME:server-latest .
+   - docker login --username=$HEROKU_EMAIL --password=$HEROKU_API_KEY $HEROKU_REGISTRY
+   - docker tag $PROJECT_NAME:server-latest $HEROKU_REGISTRY/$PROJECT_NAME/web
+   - docker push $HEROKU_REGISTRY/$PROJECT_NAME/web
+
+ only:   
+   variables:
+     - $BUILD_DOCKER_IMAGES == "true"
+
+deploy-aceitacao:
+ image: docker:latest
+ stage: aceitacao
+ environment:
+   name: aceitacao
+ before_script:
+   - apk add npm
+   - npm install -g heroku
+   - heroku container:login
+ script:   
+   - heroku container:release --app $PROJECT_NAME web --verbose
+   - heroku ps:scale web=1 --app $PROJECT_NAME
+ only:
+   variables:
+    - $DEPLOY_ACEITACAO == "true"
