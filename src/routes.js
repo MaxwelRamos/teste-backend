@@ -15,36 +15,38 @@ routes.get("/", (req,res) => {
 });
 
 //Routes relacionadas ao Usuario
-routes.post("/login", async (req,res) => {
-    const { email, password } = req.body;
+routes.get("/login", async (req,res) => {
+    return res.json({ Local: 'Veioo'});
 
-    const usuario = await User.findOne({email: email});
-    if (!usuario){
-        return res.status(401).json({
-            error: true,
-            code: 106,
-            message: "Erro: Usuário ou Senha não confere!"
-        })
-    }
+    // const { email, password } = req.body;
 
-    if (!(await bcrypt.compare(password, usuario.password))){
-        return res.status(401).json({
-            error: true,
-            code: 106,
-            message: "Erro: Usuário/Senha não confere!"
-        })
-    }
+    // const usuario = await User.findOne({email: email});
+    // if (!usuario){
+    //     return res.status(401).json({
+    //         error: true,
+    //         code: 106,
+    //         message: "Erro: Usuário ou Senha não confere!"
+    //     })
+    // }
 
-    const token = jwt.sign({id: usuario._id}, configAuth.secret, {expiresIn: configAuth.expiresIn})
+    // if (!(await bcrypt.compare(password, usuario.password))){
+    //     return res.status(401).json({
+    //         error: true,
+    //         code: 106,
+    //         message: "Erro: Usuário/Senha não confere!"
+    //     })
+    // }
 
-    return res.json({
-        error: false,
-        user: {
-            id: usuario.id,
-            email
-        },
-        token
-    });
+    // const token = jwt.sign({id: usuario._id}, configAuth.secret, {expiresIn: configAuth.expiresIn})
+
+    // return res.json({
+    //     error: false,
+    //     user: {
+    //         id: usuario.id,
+    //         email
+    //     },
+    //     token
+    // });
 });
 
 routes.get("/users", async (req,res) => {
