@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const configAuth = require('../../auth');
 
+//Verificacao de usuario e senha, gera Token
 const Login = async (req,res) => {
      const { email, password } = req.body;
 
@@ -36,4 +37,13 @@ const Login = async (req,res) => {
      });
 };
 
-module.exports = { Login }
+//Valida token
+const validateToken = (req, res, next) => {
+    const token = req.body.token || ''
+
+    jwt.verify(token, configAuth.secret, function (err, decoded) {
+        return res.status(200).send({ valid: !err })
+    })
+}
+
+module.exports = { Login, validateToken }
