@@ -15,8 +15,8 @@ routes.get("/", (req,res) => {
 });
 
 //Routes relacionadas ao Usuario
-routes.get("/login", async (req,res) => {
-    return res.json({ Local: 'Veioo'});
+routes.post("/login", async (req,res) => {
+    return res.json({ Local: 'Veio2'});
 
     // const { email, password } = req.body;
 
