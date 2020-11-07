@@ -16,6 +16,7 @@ routes.get("/", (req,res) => {
 
 //Routes relacionadas ao Usuario
 routes.post("/login", async (req,res) => {
+    res.send('veio');
     const { email, password } = req.body;
 
     const usuario = await User.findOne({email: email});
