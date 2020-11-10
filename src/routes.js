@@ -9,7 +9,7 @@ const authMiddleware = require('./middlewares/token');
 const LoginController = require('./controllers/Login');
 
 routes.get("/", (req,res) => {
-    return res.json({ Local: 'Raiz3'});
+    return res.json({ Local: 'Raiz4'});
 });
 
 //Routes relacionadas ao Usuario
