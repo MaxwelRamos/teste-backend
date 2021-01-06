@@ -7,12 +7,24 @@ const User = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
     },
     password: {
         type: String,
         required: true
-    }    
+    },
+    quantidadeMensal: {
+        type: Number,
+    },
+    mesResgate: {
+        type: Number,
+    },
+    anoResgate: {
+        type: Number,
+    },
+    quantidadeTotal: {
+        type: Number,
+    },
 },
 {
     timestamps: true,
