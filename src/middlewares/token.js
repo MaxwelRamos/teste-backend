@@ -4,7 +4,6 @@ const configAuth = require('../../auth');
 
 module.exports = (req, res, next) => {
     const authHeader = req.body.token || req.query.token || req.headers['authorization']
-    const email = req.headers['x-tenant-id']
 
     if (!authHeader) {
         return res.status(403).send({ errors: ['No token provided.'] })

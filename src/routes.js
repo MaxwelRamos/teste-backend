@@ -1,5 +1,3 @@
-// require('dotenv').config();
-
 const routes = require('express').Router();
 const authMiddleware = require('./middlewares/token');
 const LoginController = require('./controllers/Login');
@@ -17,11 +15,11 @@ routes.get('/users', LoginController.Users);
 
 //Routes relacionadas a Moedas
 routes.post('/envioCoins', authMiddleware, CoinController.EnvioCoins); 
-routes.get('/getSaldo', CoinController.GetSaldo);
-routes.get('/moedasEnviadas', CoinController.GetMoedasEnviadas); 
-routes.get('/moedasRecebidas', CoinController.GetMoedasRecebidas); 
-routes.post('/moedas', CoinController.GetMoedas); 
-routes.post('/setSaldoMensal', CoinController.SetSaldoMensal); 
+routes.get('/getSaldo', authMiddleware, CoinController.GetSaldo);
+routes.get('/moedasEnviadas', authMiddleware, CoinController.GetMoedasEnviadas); 
+routes.get('/moedasRecebidas', authMiddleware, CoinController.GetMoedasRecebidas); 
+routes.post('/moedas', authMiddleware, CoinController.GetMoedas); 
+routes.post('/setSaldoMensal', authMiddleware, CoinController.SetSaldoMensal); 
 
 //Rota responsavel por validar o Token
 routes.post('/validateToken', TokenController.validateToken); 
